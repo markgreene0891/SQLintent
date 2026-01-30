@@ -1,0 +1,30 @@
+{
+  "tables": {
+    "mining_production": {
+      "name_cn": "采场生产数据",
+      "fields": {
+        "pit_id": ["采场编号", "采场", "矿场"],
+        "date": ["日期", "时间"],
+        "ore_output": ["出矿量", "产量", "矿石产量","矿量","粗矿量"],
+        "waste_output": ["废石量", "废料", "废石"],
+        "net_ore_output": ["净矿量", "净产量"]
+      },
+      "common_queries": [
+        {
+          "pattern": "(PIT-\\d{3})",
+          "template": "SELECT * FROM mining_production WHERE pit_id = '{0}'"
+        },
+        {
+          "pattern": "最近(\\d+)天",
+          "template": "SELECT * FROM mining_production WHERE date >= date('now', '-{0} days')"
+        }
+      ]
+    }
+  },
+
+  "patterns": {
+    "simple_query": "(查询|查看|显示|获取)\\s*(.*)",
+    "stat_query": "(统计|计算)\\s*(.*?)\\s*(数量|平均|总和)",
+    "compare_query": "(对比|比较)\\s*(.*?)\\s*(和|与)\\s*(.*)"
+  }
+}
